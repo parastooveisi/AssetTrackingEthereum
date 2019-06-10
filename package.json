@@ -1,0 +1,40 @@
+{
+  "name": "supplychain",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha",
+    "dev": "next dev",
+    "start": "webpack-dev-server --mode development",
+    "transpile": "babel src -d dist --copy-files",
+    "prepublishOnly": "npm run transpile",
+    "build": "webpack --mode production",
+    "deploy": "gh-pages -d examples/dist",
+    "publish-demo": "npm run build && npm run deploy"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/polyfill": "^7.2.5",
+    "fs-extra": "^7.0.1",
+    "ganache-cli": "^6.2.5",
+    "mocha": "^5.2.0",
+    "next": "^4.1.4",
+    "next-routes": "^1.4.2",
+    "react": "^16.7.0",
+    "react-dom": "^16.7.0",
+    "react-timeline-semantic-ui": "^1.0.13",
+    "semantic-ui-react": "^0.82.5",
+    "solc": "^0.4.25",
+    "truffle-hdwallet-provider": "0.0.3",
+    "web3": "^1.0.0-beta.35"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.2.2",
+    "@babel/preset-env": "^7.3.1",
+    "babel-cli": "^6.26.0",
+    "css-loader": "^2.1.0"
+  }
+}
