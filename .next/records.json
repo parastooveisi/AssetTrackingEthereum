@@ -1,0 +1,25 @@
+{
+  "modules": {
+    "byIdentifier": {
+      "ignored node_modules/readable-stream/lib util": 0,
+      "ignored node_modules/readable-stream/lib/internal/streams util": 1,
+      "ignored node_modules/bn.js/lib buffer": 2,
+      "ignored node_modules/brorand crypto": 3,
+      "ignored ../node_modules/bn.js/lib buffer": 4,
+      "ignored ../node_modules/brorand crypto": 5
+    },
+    "usedIds": {
+      "0": 0,
+      "1": 1,
+      "2": 2,
+      "3": 3,
+      "4": 4,
+      "5": 5
+    }
+  },
+  "chunks": {
+    "byName": {},
+    "bySource": {},
+    "usedIds": []
+  }
+}

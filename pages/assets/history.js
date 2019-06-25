@@ -8,7 +8,6 @@ import tracker from "../../ethereum/tracker";
 import AssetRow from "../../components/AssetRow";
 // import Timeline from './Timeline';
 //import './timeline.css';
-import {Timeline, TimelineEvent} from 'react-event-timeline'
 
 class History extends Component {
   static async getInitialProps(props) {
