@@ -11,9 +11,8 @@ class AssetTracker extends Component {
     const buyers = await tracker.methods.getbuyers().call();
     const producers = await tracker.methods.getproducers().call();
     const assetCount = await tracker.methods.assetsCount().call();
-    
-    const blockNumber = await web3.eth.getBlockNumber();
-    console.log('jjjjjjjjjjjj', blockNumber);
+    let id = await tracker.methods.getid().call();
+    console.log(id);
     // const info = await web3.eth.getBlock(blockNumber);
     // console.log(info);
 
@@ -82,16 +81,6 @@ class AssetTracker extends Component {
           />
 
           <h3> List of all Purchesers! </h3>
-          <Link route="assets/new">
-            <a>
-              <Button
-                floated="right"
-                content="Create an asset"
-                icon="add circle"
-                primary
-              />
-            </a>
-          </Link>
           {this.renderbuyers()}
         </div>
         <h3> Asset details! </h3>

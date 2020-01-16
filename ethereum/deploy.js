@@ -5,8 +5,9 @@ const compiledTracker = require("./build/AssetTracker.json");
 
 const provider = new HDWalletProvider(
   "doll add humble swear soda gasp doctor thrive family shrug rack marble",
-  "https://rinkeby.infura.io/SDM4Fg05tjRsEKoN1ZnE"
+  "https://rinkeby.infura.io/v3/8fe1f2192b9c400cb7722968d1837c18"
 );
+//"https://rinkeby.infura.io/SDM4Fg05tjRsEKoN1ZnE"
 
 const web3 = new Web3(provider);
 

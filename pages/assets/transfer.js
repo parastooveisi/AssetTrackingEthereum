@@ -25,21 +25,23 @@ class TransferForm extends Component {
   state = {
     id: "",
     value: "",
+    zipcode: "",
     errorMessage: "",
     loading: false
   };
   onSubmit = async event => {
     event.preventDefault();
     this.setState({ loading: true, errorMessage: "" });
-    const { id, value } = this.state;
+    const { id, zipcode, value } = this.state;
 
     try {
       const accounts = await web3.eth.getAccounts();
-      await tracker.methods.transferProduct(id).send({
+      await tracker.methods.transferProduct(id, zipcode).send({
         from: accounts[0],
         value: web3.utils.toWei(this.state.value, "ether"),
         gas: "1000000"
       });
+      console.log("DDDDD", id)
     } catch (err) {
       this.setState({ errorMessage: err.message });
     }
@@ -84,9 +86,16 @@ class TransferForm extends Component {
               onChange={event => this.setState({ id: event.target.value })}
             />
           </Form.Field>
+          <Form.Field>
+            <label>Coordinates</label>
+            <Input
+              value={this.state.zipcode}
+              onChange={event => this.setState({ zipcode: event.target.value })}
+            />
+          </Form.Field>
 
           <Form.Field>
-            <label>Price to buy</label>
+            <label>Amount to stake</label>
             <Input
               value={this.state.value}
               onChange={event =>
@@ -96,7 +105,7 @@ class TransferForm extends Component {
           </Form.Field>
           <Message error header="Oops!" content={this.state.errorMessage} />
           <Button loading={this.state.loading} primary>
-            Buy!
+            Confirm Purchase!
           </Button>
         </Form>
       </Layout>

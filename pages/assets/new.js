@@ -13,29 +13,36 @@ class AssetNew extends Component {
     description: "",
     manufacturer: "",
     price: "",
-    id: "",
+    zipcode: "",
+    amountToStake:"",
     loading: false,
     errorMessage: ""
   };
 
   onSubmit = async event => {
     event.preventDefault();
-    const { name, description, manufacturer, price, id } = this.state;
-    console.log(id);
+    const { name, description, manufacturer, price, zipcode, amountToStake} = this.state;
+    //console.log(id);
     this.setState({ loading: true, errorMessage: "" });
 
     try {
       const accounts = await web3.eth.getAccounts();
-
-      console.log(accounts[0]);
+      console.log("sasad",accounts);
       await tracker.methods
-        .createAsset(name, description, manufacturer, price, id)
-        .send({ from: accounts[0], gas: "1000000" });
+        .createAsset(name, description, manufacturer, price, zipcode)
+        .send({
+          from: accounts[0],
+          value: web3.utils.toWei(this.state.amountToStake, "ether"),
+          gas: "1000000"
+        });
+
         var d = new Date().toLocaleTimeString(); // for now
         console.log(d);
-        d.getHours(); // => 9
-        d.getMinutes(); // =>  30
-        d.getSeconds();
+
+      //   var event = tracker.AssetCreate().watch(function(error, result) {
+      //     console.log(result);
+      // });
+
       Router.pushRoute("/");
     } catch (err) {
       this.setState({ errorMessage: err.message });
@@ -46,7 +53,7 @@ class AssetNew extends Component {
   render() {
     return (
       <Layout>
-        <h3> Create an Asset </h3>
+        <h3> Register New Product </h3>
         <Form onSubmit={this.onSubmit} error={!!this.state.errorMessage}>
           <Form.Field>
             <label>Name</label>
@@ -83,14 +90,21 @@ class AssetNew extends Component {
               onChange={event => this.setState({ price: event.target.value })}
             />
           </Form.Field>
-
           <Form.Field>
-            <label>ID</label>
+            <label>Coordinates</label>
             <Input
-              value={this.state.id}
-              onChange={event => this.setState({ id: event.target.value })}
+              value={this.state.zipcode}
+              onChange={event => this.setState({ zipcode: event.target.value })}
             />
           </Form.Field>
+          <Form.Field>
+            <label>Stake</label>
+            <Input
+              value={this.state.amountToStake}
+              onChange={event => this.setState({ amountToStake: event.target.value })}
+            />
+          </Form.Field>
+
           <Message error header="Oops!" content={this.state.errorMessage} />
           <Button primary loading={this.state.loading}>
             Create
@@ -102,3 +116,12 @@ class AssetNew extends Component {
 }
 
 export default AssetNew;
+
+
+// <Form.Field>
+//   <label>ID</label>
+//   <Input
+//     value={this.state.id}
+//     onChange={event => this.setState({ id: event.target.value })}
+//   />
+// </Form.Field>
