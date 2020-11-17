@@ -22,12 +22,10 @@ class AssetNew extends Component {
   onSubmit = async event => {
     event.preventDefault();
     const { name, description, manufacturer, price, zipcode, amountToStake} = this.state;
-    //console.log(id);
     this.setState({ loading: true, errorMessage: "" });
 
     try {
       const accounts = await web3.eth.getAccounts();
-      console.log("sasad",accounts);
       await tracker.methods
         .createAsset(name, description, manufacturer, price, zipcode)
         .send({
@@ -36,12 +34,8 @@ class AssetNew extends Component {
           gas: "1000000"
         });
 
-        var d = new Date().toLocaleTimeString(); // for now
-        console.log(d);
-
-      //   var event = tracker.AssetCreate().watch(function(error, result) {
-      //     console.log(result);
-      // });
+        // var d = new Date().toLocaleTimeString(); // for now
+        // console.log(d);
 
       Router.pushRoute("/");
     } catch (err) {
@@ -116,12 +110,3 @@ class AssetNew extends Component {
 }
 
 export default AssetNew;
-
-
-// <Form.Field>
-//   <label>ID</label>
-//   <Input
-//     value={this.state.id}
-//     onChange={event => this.setState({ id: event.target.value })}
-//   />
-// </Form.Field>

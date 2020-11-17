@@ -41,7 +41,7 @@ class TransferForm extends Component {
         value: web3.utils.toWei(this.state.value, "ether"),
         gas: "1000000"
       });
-      console.log("DDDDD", id)
+
     } catch (err) {
       this.setState({ errorMessage: err.message });
     }

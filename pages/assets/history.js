@@ -19,10 +19,7 @@ class History extends Component {
     zoom: 6
   };
 
-
-
   static async getInitialProps(props) {
-    //const myLatLng = {lat: 52.13, lng: -106.66};
     const lengthOwners = await tracker.methods.lengthOwners(props.query.id).call();
     let addresscounts = await tracker.methods.zipCounts().call()
 
@@ -33,7 +30,7 @@ class History extends Component {
           return tracker.methods.owners(props.query.id,index).call();
         })
     );
-    console.log(owners);
+
 
     let addressArray = await Promise.all(
       Array(parseInt(addresscounts))
@@ -50,9 +47,7 @@ class History extends Component {
       lng
     };
   });
-
-//console.log(result)
-
+  console.log(myLatLng);
     const address = {addressArray}
 
   return {
@@ -62,14 +57,12 @@ class History extends Component {
   };
 }
 renderMarkers(map, maps) {
-
-
+  console.log("hsdcdc");
   let i;
   for(i = 0; i < this.props.myLatLng.length; i++){
   let marker = new maps.Marker({
     position: this.props.myLatLng[i],
     map,
-    title: 'Hello World!' + i
   });
   let infowindow = new google.maps.InfoWindow({
     content: "Owner" + (i + 1) + ": " + this.props.owners[i]
@@ -78,7 +71,6 @@ renderMarkers(map, maps) {
     infowindow.open(map, marker);
   });
   }
-
 }
 
 renderPolylines (map, maps) {
@@ -97,7 +89,6 @@ renderPolylines (map, maps) {
     })
     geodesicPolyline.setMap(map)
   }
-
 
 renderowners() {
   const items = this.props.owners.map(address => {
@@ -121,19 +112,17 @@ renderowners() {
      </div>
      <div style={{ height: '70vh', width: '100%' }}>
         <GoogleMapReact
-          bootstrapURLKeys={{ key: 'AIzaSyDNA-2TGMfLQn_dIcr0gUNI6gz93qMxHDk' }}
+          bootstrapURLKeys={{ key: 'AIzaSyBJ-5C-ZdpLtLcJ99wDloLSRqmsVxLrLrw' }}
           defaultCenter={this.props.center}
           defaultZoom={this.props.zoom}
+          yesIWantToUseGoogleMapApiInternals={true}
           onGoogleApiLoaded={({map, maps}) => (this.renderMarkers(map, maps), this.renderPolylines(map, maps))}
         >
-
         </GoogleMapReact>
        </div>
      </Layout>
   );
   }
+
 }
 export default History;
-
-
-///          onGoogleApiLoaded={({map, maps}) => this.renderPolylines(map, maps)}
