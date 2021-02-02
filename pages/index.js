@@ -2,8 +2,6 @@ import React, { Component } from "react";
 import { Card, Button, Table } from "semantic-ui-react";
 import tracker from "../ethereum/tracker";
 import Layout from "../components/Layout";
-import { Link } from "../routes";
-import web3 from "../ethereum/web3";
 import AssetRow from "../components/AssetRow";
 
 class AssetTracker extends Component {
@@ -11,11 +9,6 @@ class AssetTracker extends Component {
     const buyers = await tracker.methods.getbuyers().call();
     const producers = await tracker.methods.getproducers().call();
     const assetCount = await tracker.methods.assetsCount().call();
-    let id = await tracker.methods.getid().call();
-    console.log(id);
-    // const info = await web3.eth.getBlock(blockNumber);
-    // console.log(info);
-
 
     let assets = await Promise.all(
       Array(parseInt(assetCount))
@@ -28,27 +21,27 @@ class AssetTracker extends Component {
       buyers,
       producers,
       assets,
-      assetCount
+      assetCount,
     };
   }
 
   renderbuyers() {
-    const items = this.props.buyers.map(address => {
+    const items = this.props.buyers.map((address) => {
       return {
         header: address,
         description: "",
-        fluid: true
+        fluid: true,
       };
     });
 
     return <Card.Group items={items} />;
   }
   renderproducers() {
-    const items = this.props.producers.map(address => {
+    const items = this.props.producers.map((address) => {
       return {
         header: address,
         description: "",
-        fluid: true
+        fluid: true,
       };
     });
 
@@ -57,14 +50,7 @@ class AssetTracker extends Component {
 
   renderRows() {
     return this.props.assets.map((asset, index) => {
-      return (
-        <AssetRow
-          key={index}
-          id={index}
-          asset={asset}
-          //address={this.props.owner}
-        />
-      );
+      return <AssetRow key={index} id={index} asset={asset} />;
     });
   }
   render() {
@@ -94,7 +80,6 @@ class AssetTracker extends Component {
               <HeaderCell>Manufacturer</HeaderCell>
               <HeaderCell>Price</HeaderCell>
               <HeaderCell>Address of Owner</HeaderCell>
-
             </Row>
           </Header>
           <Body>{this.renderRows()}</Body>
