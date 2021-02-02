@@ -1,12 +1,8 @@
 import React, { Fragment, Component } from "react";
-import { render } from "react-dom";
 import Layout from "../../components/Layout";
 import { Card, Button, Table } from "semantic-ui-react";
 import tracker from "../../ethereum/tracker";
-import AssetRow from "../../components/AssetRow";
-import Geocode from "react-geocode";
 import GoogleMapReact from "google-map-react";
-import Polyline from "google-map-react";
 
 class History extends Component {
   static defaultProps = {
